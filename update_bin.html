@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Bin</title>
+    <style>/* General Body Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+            background: url('/static/images/background.jpg') no-repeat center center fixed; /* Background image */
+            background-size: cover;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #04AA6D; /* Primary color */
+            color: white;
+            padding: 1em;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        
+        /* Link/Button in Header */
+        header a {
+            color: white;
+            font-size: 1em;
+            text-decoration: none;
+            position: absolute;
+            top: 50%;
+            right: 2em;
+            transform: translateY(-50%);
+            padding: 0.5em 1em;
+            border: 1px solid white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        header a:hover {
+            background-color: white;
+            color: #268150;
+        }
+        
+        /* Main Content Styles */
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 70px); /* Full height minus header */
+            padding: 2em;
+            box-sizing: border-box;
+        }
+        
+        form {
+            background-color: #d5dbdb; /* Slightly transparent gray background */
+            padding: 2em 2.5em;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        form label {
+            display: block;
+            margin-top: 1em;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        form select,
+        form input {
+            width: 100%;
+            padding: 0.8em;
+            margin-top: 0.5em;
+            margin-bottom: 1.5em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        /* Button Styles */
+        form button {
+            background-color: #04AA6D; /* Primary color */
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 0.8em 1.5em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        
+        form button:hover {
+            background-color: #268150; /* Darker shade for hover effect */
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            form {
+                padding: 1.5em;
+            }
+        
+            header a {
+                font-size: 0.9em;
+                padding: 0.4em 0.8em;
+            }
+        }
+        
+        </style>
+</head>
+<body>
+    <header>
+        <h1>Update Bin</h1>
+        <a href="/admin-dashboard">Back to Dashboard</a>
+    </header>
+    <main>
+        <form method="POST">
+            <label for="bin">Select Bin:</label>
+            <select id="bin" name="bin_id" required>
+                {% for bin in bins %}
+                <option value="{{ bin.id }}">{{ bin.location }} ({{ bin.status }})</option>
+                {% endfor %}
+            </select>
+
+            <label for="status">New Status:</label>
+            <select id="status" name="status">
+                <option value="Empty">Empty</option>
+                <option value="Full">Full</option>
+            </select>
+
+            <button type="submit">Update Bin</button>
+        </form>
+    </main>
+</body>
+</html>

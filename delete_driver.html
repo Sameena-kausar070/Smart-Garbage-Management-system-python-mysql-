@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Driver</title>
+<style>/* General Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    /* Body Styling */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4; /* Light background color */
+        color: #333; /* Default text color */
+        line-height: 1.6;
+    }
+    
+    /* Header Styling */
+    header {
+            background-color: #04AA6D; /* Primary green */
+            color: white;
+            padding: 1em;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        
+        header a {
+            color: white;
+            font-size: 1em;
+            text-decoration: none;
+            position: absolute;
+            top: 50%;
+            right: 2em;
+            transform: translateY(-50%);
+            padding: 0.5em 1em;
+            border: 1px solid white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        header a:hover {
+            background-color: white;
+            color: #4CAF50;
+        }
+    
+    /* Main Content Styling */
+    main {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        justify-content: center;
+        align-items: center;
+        max-width: 800px;
+        margin: 2rem auto;
+        text-align: center;
+        padding: 2rem;
+        background-color: #d5dbdb; /* Light gray background for content */
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 400px; /* Limit form width */
+        gap: 1.5rem; /* Add space between form elements */
+    }
+    
+    label {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+        text-align: left;
+    }
+    
+    select {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    button {
+        background-color: #04AA6D; /* Primary button color */
+        color: white;
+        font-size: 1.2rem;
+        padding: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    
+    button:hover {
+        background-color: #1d6a42; /* Darker shade of primary button color */
+        transform: scale(1.05);
+    }
+    
+    button:active {
+        transform: scale(1);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        header h1 {
+            font-size: 2rem; /* Smaller header text for small screens */
+        }
+    
+        header a {
+            font-size: 1rem; /* Smaller font for buttons */
+            padding: 0.8rem 1.2rem;
+        }
+    
+        form {
+            width: 70%; /* Adjust form width for smaller screens */
+        }
+    
+        button {
+            font-size: 1rem; /* Adjust button font size */
+            padding: 0.8rem;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Delete Driver</h1>
+        <a href="/admin-dashboard">Back to Dashboard</a>
+    </header>
+    <main>
+        <form method="POST">
+            <label for="driver">Select Driver:</label>
+            <select id="driver" name="driver_id" required>
+                {% for driver in drivers %}
+                <option value="{{ driver.id }}">{{ driver.name }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Delete Driver</button>
+        </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Pickup Requests</title>
+<style>
+    /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Light background color */
+    color: #333; /* Default text color */
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Header Styling */
+header {
+            background-color: #04AA6D; /* Primary green */
+            color: white;
+            padding: 1em;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        
+        header a {
+            color: white;
+            font-size: 1em;
+            text-decoration: none;
+            position: absolute;
+            top: 50%;
+            right: 2em;
+            transform: translateY(-50%);
+            padding: 0.5em 1em;
+            border: 1px solid white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        header a:hover {
+            background-color: white;
+            color: #4CAF50;
+        }
+        
+/* Main Content Styling */
+main {
+    display: flex;
+    flex-direction: column; /* Vertical stacking of elements */
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #d5dbdb; /* Subtle gray background */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+}
+
+thead {
+    background-color: #04AA6D;
+    color: white;
+}
+
+thead th {
+    padding: 1rem;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+tbody tr {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ccc;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternating row colors */
+}
+
+td {
+    padding: 1rem;
+    text-align: left;
+    font-size: 1rem;
+}
+
+/* Action Buttons */
+.button {
+    display: inline-block;
+    padding: 0.8rem 1.2rem;
+    margin: 0.2rem;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button.approve {
+    background-color: #04AA6D;
+    color: white;
+}
+
+.button.approve:hover {
+    background-color: #1d6a42;
+    transform: scale(1.05);
+}
+
+.button.reject {
+    background-color: #d9534f; /* Bootstrap Danger Color */
+    color: white;
+}
+
+.button.reject:hover {
+    background-color: #b52a27;
+    transform: scale(1.05);
+}
+
+/* No Requests Message */
+p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    main {
+        padding: 1.5rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    .button {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
+}
+</style>
+</head>
+<body>
+    <header>
+        <h1>Manage Pickup Requests</h1>
+        <a href="/admin-dashboard">Back to Dashboard</a>
+    </header>
+    <main>
+        <h2>Pending Requests</h2>
+        {% if pending_requests %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in pending_requests %}
+                <tr>
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.location }}</td>
+                    <td>{{ request.status }}</td>
+                    <td>
+                        <a href="{{ url_for('approve_request', request_id=request.id) }}" class="button approve">Approve</a>
+                        <a href="{{ url_for('reject_request', request_id=request.id) }}" class="button reject">Reject</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No pending requests.</p>
+        {% endif %}
+
+        <h2>Processed Requests</h2>
+        {% if processed_requests %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in processed_requests %}
+                <tr>
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.location }}</td>
+                    <td>{{ request.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No processed requests.</p>
+        {% endif %}
+    </main>
+</body>
+</html>

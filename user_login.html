@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #04AA6D;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        /* Main Content Styling */
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 2em;
+            width: 100%;
+            max-width: 400px;
+            background-color: #d5dbdb;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            margin-top: 2em; /* Give space below the sticky header */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+        }
+
+        label {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 1em;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8em;
+            margin-top: 0.5em;
+            margin-bottom: 1.5em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: #04AA6D;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 0.8em 1.5em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #268150;
+        }
+
+        /* Line Style for separating buttons */
+        .line {
+            margin: 1.5em 0;
+            border-top: 1px solid #ccc;
+        }
+
+        .register-link {
+            margin-top: 1em;
+            font-size: 1em;
+        }
+
+        .register-link a {
+            color: #04AA6D;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            form {
+                padding: 1.5em;
+            }
+
+            button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>User Login</h1>
+    </header>
+    <main>
+        <form action="/user-login" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+
+            <!-- Line to separate Login button and Register option -->
+            <div class="line"></div>
+
+            <div class="register-link">
+                Don't have an account? <a href="/user-register">Register here</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
